@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+<data>
+    <record id="visit_management_act_window" model="ir.actions.act_window">
+        <field name="name">Visit Management</field>
+        <field name="res_model">visit.management</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new data.
+            </p>
+        </field>
+    </record>
+
+    <record id="vetting_report_line_form" model="ir.ui.view">
+        <field name="name">Vetting Report Line</field>
+        <field name="model">vetting.report.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Show Line:" />
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline"/>
+                     </div>
+                    <h1>
+                        <field
+                                name="name"
+                                class="oe_inline"
+                                readonly="1"
+                        />
+                    </h1>
+                    <div class="oe_edit_only">
+                        <label for="type_vessel" class="oe_inline"/>
+                    </div>
+                    <h2>
+                        <field
+                                name="type_vessel"
+                                class="oe_inline"
+                                readonly="1"
+                        />
+                    </h2>
+                    <group>
+                       <group>
+                            <field name="jenis_inspeksi_id"/>
+                           <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="item_count"/>
+                        </group>
+                     </group>
+                    <notebook>
+                       <page string="List Item">
+                            <field name="list_finding_item"
+                                   widget="section_and_note_one2many"
+                                   mode="tree">
+                                <tree editable="bottom">
+                                    <field name="image_1920"/>
+                                    <field name="name"/>
+                                    <field name="penanggung_jawab"/>
+                                    <field name="open_date" />
+                                    <field name="close_date" />
+                                    <field name="target_date" />
+                                    <field name="percentage" />
+                                    <field name="remark"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="visit_management_form_view" model="ir.ui.view">
+        <field name="name">bpg_module.visit_management.form</field>
+        <field name="model">visit.management</field>
+        <field name="arch" type="xml">
+            <form string="Visit Management">
+                <header>
+                    <button
+                        name="button_open"
+                        states="close"
+                        string="Reset"
+                        type="object"
+                    />
+                    <button
+                        name="button_on_progress"
+                        states="open"
+                        string="Set On Progress"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="button_close"
+                        states="on_progress"
+                        string="Set Close"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                     <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="open,on_progress,close"
+                        statusbar_colors='{"close":"blue"}'
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Judul kunjungan" />
+                        </h1>
+                        <label for="tipe_kunjungan" />
+                        <h2>
+                            <field name="tipe_kunjungan" placeholder="Tipe kunjungan" />
+                        </h2>
+                        <label for="vessel_id" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                        <h3>
+                            <field name="vessel_id" placeholder="Nama Kapal" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                        </h3>
+                        <label for="fleet" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                        <h3>
+                            <field name="fleet" readonly="1" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="type_vessel" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                            <field name="date" placeholder="Tanggal Kunjungan" />
+                            <field name="pic"/>
+                            <field name="metode_rapat" attrs="{'invisible':[('tipe_kunjungan','not in',('toolBoxMeeting'))]}"/>
+                             <field name="jenis_rapat" attrs="{'invisible':[('tipe_kunjungan','not in',('toolBoxMeeting'))]}"/>
+                            <field name="divisi_id" />
+                            <field name="vendor" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                            <field name="lokasi" placeholder="Lokasi kunjungan" />
+                            <field name="latitude" placeholder="Latitude" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                            <field name="longitude" placeholder="Longitude" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}"/>
+                        </group>
+                        <group>
+                            <field name="open_date" />
+                            <field name="close_date" />
+                            <field name="deadline_date" />
+                            <field name="document" />
+                            <field name="count_anggota" />
+                            <field name="sisa_waktu" />
+                        </group>
+                    </group>
+                    <separator string="Catatan"/>
+                    <label for="catatan" string="Catatan kunjungan:"/>
+                    <field name="catatan" />
+                    <separator string="Foto Kunjungan"/>
+                    <field name="image_1920" widget="image"/>
+
+                    <notebook position="inside">
+                        <page string="Anggota">
+                            <field name="anggota_id"
+                                   widget="section_and_note_one2many"
+                                   mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="jabatan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="List Finding" attrs="{'invisible':[('tipe_kunjungan','not in',('visit','perbaikan','vetting','vettingPlus','negativeFeedback','selfAssesment',))]}">
+                            <field name="kunjungan_line" widget="section_and_note_one2many"
+                                mode="tree">
+                                <tree editable="bottom">
+                                    <field name="tipe_kunjungan" invisible="1"/>
+                                    <field name="name" readonly="1" />
+                                    <field name="type_vessel" readonly="1" />
+                                    <field name="jenis_inspeksi_id" />
+                                    <field name="date"/>
+                                    <field name="lokasi"/>
+                                    <field name="item_count" />
+                                    <field name="status"/>
+                                    <field name="list_finding_item" invisible="1" />
+                                    <button string="Items" name="action_openListItemTreeView"
+                                        type="object" icon="fa-folder-open-o" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="List Meeting" attrs="{'invisible':[('tipe_kunjungan','not in',('toolBoxMeeting'))]}">
+                            <field name="meeting_line" widget="section_and_note_one2many"
+                                mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tindak_lanjut"/>
+                                    <field name="open_date"/>
+                                    <field name="close_date"/>
+                                    <field name="deadline_date"/>
+                                    <field name="percentage"/>
+                                    <field name="status" />
+                                    <field name="divisi"/>
+                                    <field name="keterangan"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_follower" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="visit_management_tree_view" model="ir.ui.view">
+        <field name="name">bpg_module.visit_management.tree</field>
+        <field name="model">visit.management</field>
+        <field name="arch" type="xml">
+            <tree string="Visit Management">
+                <field name="name" />
+                <field name="date" />
+                <field name="tipe_kunjungan" />
+                <field name="divisi_id" />
+                <field name="lokasi" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem name="BPG Module" id="menu_bpg_mgt"
+        web_icon="bpg_module,static/description/icon.png" />
+
+    <menuitem name="Main Menu" parent="menu_bpg_mgt" id="main_menu" sequence="30" />
+
+    <menuitem action="visit_management_act_window" id="visit_menu" name="Visit Management"
+        parent="main_menu" sequence="10" />
+</data>
+</odoo>

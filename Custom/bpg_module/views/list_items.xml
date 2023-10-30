@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="finding_item_act_window" model="ir.actions.act_window">
+        <field name="name">List Finding</field>
+        <field name="res_model">finding.item</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new data.
+            </p>
+        </field>
+    </record>
+
+    <record id="finding_item_form_view" model="ir.ui.view">
+        <field name="name">finding.item.form.view</field>
+        <field name="model">finding.item</field>
+        <field name="arch" type="xml">
+            <form string="List Finding">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Nama" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <separator string="Foto Evidence"/>
+                            <field name="image_1920" widget="image"/>
+                            <field name="remark" />
+                            <field name="open_date" />
+                            <field name="close_date" />
+                            <field name="target_date" />
+                        </group>
+                        <group>
+                            <field name="percentage" />
+                            <field name="penanggung_jawab" />
+                            <field name="status" />
+                            <field name="group_vetting_report_line_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Action">
+                            <field name="action_item_ids" widget="section_and_note_one2many"
+                                mode="tree">
+                                <tree editable="bottom">
+                                    <field name="title" />
+                                    <field name="deskripsi" />
+                                    <field name="open_date" />
+                                    <field name="close_date" />
+                                    <field name="target_date" />
+                                    <field name="status" />
+                                    <field name="Action_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_follower" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="finding_item_tree_view" model="ir.ui.view">
+        <field name="name">List Finding Item</field>
+        <field name="model">finding.item</field>
+        <field name="arch" type="xml">
+            <tree string="List Finding">
+                <field name="name" />
+                <field name="remark" />
+                <field name="open_date" />
+                <field name="close_date" />
+                <field name="target_date" />
+                <field name="percentage" />
+                <field name="penanggung_jawab" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <menuitem action="finding_item_act_window"
+        id="finding_item"
+        name="List Finding"
+        parent="main_menu" sequence="30" />
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="vetting_report_act_window" model="ir.actions.act_window">
+        <field name="name">Vetting Report</field>
+        <field name="res_model">vetting.report.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new data.
+            </p>
+        </field>
+    </record>
+
+    <record id="vetting_report_form_view" model="ir.ui.view">
+        <field name="name">bpg_module.vetting_report.form</field>
+        <field name="model">vetting.report.line</field>
+        <field name="arch" type="xml">
+            <form string="Vetting Report">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Nama" readonly="1"/>
+                        </h1>
+                        <label for="type_vessel" />
+                        <h2>
+                            <field name="type_vessel" placeholder="Type Vessel" readonly="1"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="jenis_inspeksi_id" />
+                            <field name="status" />
+                            <field name="date" />
+                        </group>
+                        <group>
+                            <field name="lokasi" />
+                            <field name="item_count" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vetting_report_tree_view" model="ir.ui.view">
+        <field name="name">bpg_module.vetting_report.tree</field>
+        <field name="model">vetting.report.line</field>
+        <field name="arch" type="xml">
+            <tree string="Vetting Report">
+                <field name="name" />
+                <field name="type_vessel" />
+                <field name="jenis_inspeksi_id" />
+                <field name="date" />
+                <field name="lokasi" />
+                <field name="item_count" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <menuitem action="vetting_report_act_window"
+        id="vetting_report"
+        name="Vetting Report"
+        parent="main_menu" sequence="20" />
+</odoo>

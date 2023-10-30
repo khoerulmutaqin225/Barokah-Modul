@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+<data>
+    <record id="vetting_report_act_window" model="ir.actions.act_window">
+        <field name="name">Vetting Report</field>
+        <field name="res_model">vetting.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new data.
+            </p>
+        </field>
+    </record>
+
+    <record id="vetting_report_form_view" model="ir.ui.view">
+        <field name="name">bpg_module.vetting_report.form</field>
+        <field name="model">vetting.report</field>
+        <field name="arch" type="xml">
+            <form string="Vetting Report">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Judul kunjungan" />
+                        </h1>
+                        <label for="status" />
+                        <h2>
+                            <field name="status" placeholder="Status" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group string="Umum">
+                            <field name="date"/>
+                            <field name="year_id"/>
+                            <field name="vos"/>
+                            <field name="vessel_id"/>
+                            <field name="type_vessel"/>
+                            <field name="fleet"/>
+                            <field name="expired_psa_date" />
+                        </group>
+                        <group string="Preventing">
+                            <field name="preventing_plan_date"/>
+                            <field name="preventing_act_date" />
+                            <field name="preventing_lokasi" />
+                            <field name="preventing_pic"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Pengajuan VOS">
+                            <field name="pengajuan_vos_plan_date"/>
+                            <field name="pengajuan_vos_act_date"/>
+                            <field name="pengajuan_vos_lokasi"/>
+                            <field name="pengajuan_vos_pic"/>
+                        </group>
+                        <group string="Vetting">
+                            <field name="vetting_plan_date" />
+                            <field name="vetting_online_date"/>
+                            <field name="vetting_act_date" />
+                            <field name="vetting_lokasi" />
+                            <field name="inspektor" />
+                            <field name="esscort" />
+                        </group>
+                    </group>
+                    <notebook position="inside">
+                        <page string="List Finding">
+                            <field name="vetting_report_line"
+                                   widget="section_and_note_one2many"
+                                   mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="type_vessel" readonly="1"/>
+                                    <field name="date"/>
+                                    <field name="jenis_inspeksi_id"/>
+                                    <field name="status"/>
+                                    <field name="open_date"/>
+                                    <field name="close_date"/>
+                                    <field name="deadline_date"/>
+                                    <field name="pic"/>
+                                    <field name="item_count"/>
+                                    <field name="list_finding_item" invisible="1"/>
+                                    <button string="Items" name="action_openListItemTreeView" type="object" icon="fa-folder-open-o"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_follower" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="vetting_report_line_form" model="ir.ui.view">
+        <field name="name">Vetting Report Line</field>
+        <field name="model">vetting.report.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Show Line:" />
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline"/>
+                     </div>
+                    <h1>
+                        <field
+                                name="name"
+                                class="oe_inline"
+                                readonly="1"
+                        />
+                    </h1>
+                    <div class="oe_edit_only">
+                        <label for="type_vessel" class="oe_inline"/>
+                    </div>
+                    <h2>
+                        <field
+                                name="type_vessel"
+                                class="oe_inline"
+                                readonly="1"
+                        />
+                    </h2>
+                    <group>
+                       <group>
+                            <field name="date"/>
+                            <field name="jenis_inspeksi_id"/>
+                           <field name="status"/>
+                        </group>
+                        <group>
+                             <field name="open_date"/>
+                            <field name="close_date"/>
+                            <field name="deadline_date"/>
+                            <field name="pic"/>
+                        </group>
+                     </group>
+                    <notebook>
+                       <page string="List Item">
+                            <field name="list_finding_item"
+                                   widget="section_and_note_one2many"
+                                   mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tipe_item"/>
+                                    <field name="statusRepetitive"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vetting_report_tree_view" model="ir.ui.view">
+        <field name="name">bpg_module.vetting_report.tree</field>
+        <field name="model">vetting.report</field>
+        <field name="arch" type="xml">
+            <tree string="Vetting Report">
+                <field name="name" />
+                <field name="vos" />
+                <field name="type_vessel" />
+                <field name="vessel_id" />
+                <field name="fleet" />
+                <field name="expired_psa_date" />
+                <field name="preventing_plan_date" />
+                <field name="preventing_act_date" />
+                <field name="preventing_pic" />
+                <field name="preventing_lokasi" />
+                <field name="pengajuan_vos_plan_date" />
+                <field name="pengajuan_vos_act_date" />
+                <field name="pengajuan_vos_lokasi" />
+                <field name="pengajuan_vos_pic" />
+                <field name="vetting_plan_date" />
+                <field name="vetting_online_date" />
+                <field name="vetting_act_date" />
+                <field name="vetting_lokasi" />
+                <field name="inspektor" />
+                <field name="esscort" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem action="vetting_report_act_window" id="vetting_report_menu" name="Vetting Report" parent="main_menu" sequence="20"/>
+
+    </data>
+</odoo>
